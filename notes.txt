@@ -1,0 +1,83 @@
+# created folder CHAT-APP-SOCKET
+    mkdir CHAT-APP-SOCKET
+
+# go to the directory 
+    cd  .\CHAT-APP-SOCKET\
+
+# make package.json file
+    npm init -y
+
+# set scripts and engines keys in package.json like below  (for checking your node version hit command -> node -v)
+"scripts": {
+    "dev": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "engines": {"node" : "14.5.0"},  
+  
+# create public/index.html file
+    make front end
+
+# create server/server.js and do this
+const path = require('path');
+const express = require('express');
+const app = express();
+
+const publicPath = path.join(__dirname , "/../public");
+
+app.use(express.static(publicPath));
+
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT , () => console.log(`Connected To Server On PORT ${PORT}`));    
+
+# now run this by typing in powershell
+  npm run dev
+
+# make .gitignore file in root of your project and type the files or folder u don't want to include 
+  node_modules/
+
+# to see which files are being tracked or not tracked hit
+  cmd -> git status //now we can see here there is no node_modules folder except shows something like below
+       
+        .gitignore
+        package-lock.json
+        package.json
+        server/
+
+# now we are good to add files to stack for commiting
+  cmd -> git add file_name 
+         //or   
+  cmd -> git add .     (adding all files for commiting) 
+
+# now commit the changes/files
+  cmd -> git commit -m "Your Message For the Change"
+
+# now as your all files and folder are commited we can simply push it to our gitHub Repo
+  step 1) go to browser signin to your github account 
+  step 2) make a new repository 
+  step 3) name the repository and set it to public 
+  step 4) go to code tab of this repository 
+  step 5) copy the code underneath "push an existing repoository from command line" and 
+          paste it to your terminal and hit enter   
+
+//----------------------------------------------------------------------------------------------------//
+# Yusssssss we are done with version controling now lets push this to Heroku from our online repository
+//----------------------------------------------------------------------------------------------------//
+
+# Heroku 
+   step 1) Make A Free Account On Heroku
+   step 2) install heroku on your system
+   step 3) give path "C:\Program Files\heroku\bin" for setting environment variable
+   step 4) checking if it is perfectly setup or not
+           cmd -> heroku version 
+           output => heroku/7.47.7 win32-x64 node-v12.16.2  
+   step 5) login to your heroku account by
+           cmd -> heroku login 
+           and follow the steps.
+   step 6) after u logged in to heroku in CLI  , Create Heroku App
+           cmd -> heroku create               
+           this will create our app and give us a link
+   step 7) now inorder to push our app from git to heroku write the code below.
+           cmd -> git push heroku master        
