@@ -77,7 +77,22 @@ app.listen(PORT , () => console.log(`Connected To Server On PORT ${PORT}`));
            cmd -> heroku login 
            and follow the steps.
    step 6) after u logged in to heroku in CLI  , Create Heroku App
-           cmd -> heroku create               
-           this will create our app and give us a link
+                cmd -> heroku create               
+           this will create our app and give us a link like below
+                Creating app... done, ⬢ whispering-dusk-97270
+                https://whispering-dusk-97270.herokuapp.com/ | https://git.heroku.com/whispering-dusk-97270.git
    step 7) now inorder to push our app from git to heroku write the code below.
-           cmd -> git push heroku master        
+           cmd -> git push heroku main        
+
+//------------------------------------------------------------------------------------//
+                                Socket.io
+//------------------------------------------------------------------------------------//
+
+# install socket.io
+   npm i socket.io
+
+# requiring socket.io in our project
+   const io = require('socket.io');     
+
+client.js => making the request(the connection)
+server.js => accepting the request(grabbing those connection and alowing them)
