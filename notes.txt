@@ -96,3 +96,20 @@ app.listen(PORT , () => console.log(`Connected To Server On PORT ${PORT}`));
 
 client.js => making the request(the connection)
 server.js => accepting the request(grabbing those connection and alowing them)
+
+# Creating Custom Events 
+  
+   .on => we are actualy listening to the Events
+   .emit => for calling an event
+            {we can emit any custom event anywhere but as we don't have a button so we are emiting event just after client connected to the server} 
+# io -> is used for everyOne 
+# socket -> is used for only single User/Client
+
+example : 1) Emiting To Only One User
+             -> socket.emit
+          2) Broadcasting To Everyone Except Message
+             -> socket.braodcast.emit
+          3) Broadcasting To everyOne
+             -> io.emit
+
+                

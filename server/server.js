@@ -14,15 +14,51 @@ let io = socket(server);
 io.on("connection",(socket) => {
    console.log("A New User Is Connected!!");
 
-   socket.on("disconnect",() => {
-       console.log("User Just Disconnected!!");
+// custom event calling
+// emiting to only one user
+// {Greeting Message to the connected user!}
+   socket.emit("newMessage",{ 
+        from : "Admin",
+        text : "Welcome To The ChatRoom!!",
+        createdAt : new Date().getDate()
    });
 
-   socket.io("chat_message ",(data) => {
-       console.log(`HELLO ${data['type']}`);
+//emiting to all users except me
+   socket.broadcast.emit("newMessage",{ 
+    from : "Admin",
+    text : "A new User Just Joined!!",
+    createdAt : new Date().getDate()
+   });
+
+// custom event listener
+   socket.on("createMessage",(message) => {
+       console.log(message);
+       console.log(`Message From : ${message.from}`);
+       console.log(`Message To : ${message.text}`);
+
+        //emiting to all users (broadcast to everyone even for myself)
+        io.emit("newMessage" , {
+               from : message.from,
+               text : message.text,
+               createdAt : new Date().getTime()
+           });
+       
+        // socket.broadcast.emit("newMessage" , {
+        //            from : message.from,
+        //            text : message.text,
+        //            createdAt : new Date().getTime()
+        //        });
+
        // if (new_msg == 1)  check for room 
        // else => broadcast to the given room 
-   });
+      });
+
+
+   
+    socket.on("disconnect",() => {
+        console.log("User Just Disconnected!!");
+      });
+
 });
 
 app.use(express.static(publicPath));
