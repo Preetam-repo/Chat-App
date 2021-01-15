@@ -4,7 +4,7 @@ const http = require('http');
 const socket = require('socket.io');
 const express = require('express');
 
-
+const {generateMessage} = require('./utils/message');
 const app = express();
 const publicPath = path.join(__dirname , "/../public");
 let server = http.createServer(app);
@@ -17,32 +17,21 @@ io.on("connection",(socket) => {
 // custom event calling
 // emiting to only one user
 // {Greeting Message to the connected user!}
-   socket.emit("newMessage",{ 
-        from : "Admin",
-        text : "Welcome To The ChatRoom!!",
-        createdAt : new Date().getDate()
-   });
+   socket.emit("newMessage",generateMessage("Admin","Welcome To The ChatRoom!!"));
 
 //emiting to all users except me
-   socket.broadcast.emit("newMessage",{ 
-    from : "Admin",
-    text : "A new User Just Joined!!",
-    createdAt : new Date().getDate()
-   });
+   socket.broadcast.emit("newMessage",generateMessage("Admin","A New User Just Joined!!"));
 
 // custom event listener
-   socket.on("createMessage",(message) => {
+   socket.on("createMessage",(message,callback) => {
        console.log(message);
        console.log(`Message From : ${message.from}`);
        console.log(`Message To : ${message.text}`);
 
         //emiting to all users (broadcast to everyone even for myself)
-        io.emit("newMessage" , {
-               from : message.from,
-               text : message.text,
-               createdAt : new Date().getTime()
-           });
+        io.emit("newMessage" , generateMessage(message.from,message.text));
        
+        callback("Successfully Received By The Server!!");
         // socket.broadcast.emit("newMessage" , {
         //            from : message.from,
         //            text : message.text,

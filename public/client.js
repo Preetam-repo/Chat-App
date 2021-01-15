@@ -1,4 +1,4 @@
-/* jshint esversion : 8*/ 
+/* jshint esversion : 8*/
 //  io function called which invokes an event
 var socket = io();
 
@@ -19,3 +19,10 @@ socket.on("disconnect", () => {
 socket.on("newMessage", (newMessage) => {
      console.log(newMessage);
 });   
+
+socket.emit('createMessage',{
+    from : 'chrome',
+    text : 'Successfully Sent To The Server!!'
+},function(server_acknowledge){
+    console.log(server_acknowledge);
+});

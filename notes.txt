@@ -83,7 +83,8 @@ app.listen(PORT , () => console.log(`Connected To Server On PORT ${PORT}`));
                 https://whispering-dusk-97270.herokuapp.com/ | https://git.heroku.com/whispering-dusk-97270.git
    step 7) now inorder to push our app from git to heroku write the code below.
            cmd -> git push heroku main        
-
+   step 8) To open above link
+           cmd -> heroku open 
 //------------------------------------------------------------------------------------//
                                 Socket.io
 //------------------------------------------------------------------------------------//
@@ -113,3 +114,26 @@ example : 1) Emiting To Only One User
              -> io.emit
 
                 
+# Writing Message Function  server/utils/in message.js
+# Always Try To Test Your Function with "mocha" module           
+//and utilizing it in our server.js file 
+//but before that always try to test your function before adding into the
+//main code By Following Below Steps.
+step 1) install expect and mocha in devDependencies
+step 2) in package.json create these two scripts for testing inside scripts
+        "test": "mocha server/**/*.test.js",
+        "testWatch": "nodemon --exec \"npm test\""
+step 3) create test file with extension .test.js (e.g. msg.test.js)
+step 4) in flie_name.test.js 
+         require('expect')
+         
+        // and write your testing code
+
+step 5) run test code by running test script:
+        cmd -> npm run test
+#// if it get success it shows => 1 passing (17ms)
+#// else it shows => Error
+
+if The Above Test Succeded use that function wherever required
+
+
