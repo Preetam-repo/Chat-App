@@ -5,6 +5,8 @@ const socket = require('socket.io');
 const express = require('express');
 
 const {generateMessage} = require('./utils/message');
+const {generateLocationMessage} = require('./utils/message');
+
 const app = express();
 const publicPath = path.join(__dirname , "/../public");
 let server = http.createServer(app);
@@ -41,6 +43,11 @@ io.on("connection",(socket) => {
        // if (new_msg == 1)  check for room 
        // else => broadcast to the given room 
       });
+   
+   socket.on("createLocationMessage",(coords) => {
+    //   io.emit("newMessage" , generateMessage("User",`${coords.lat} , ${coords.lng}`));
+        io.emit("newLocationMessage",generateLocationMessage("User" , coords.lat , coords.lng));
+    });
 
 
    

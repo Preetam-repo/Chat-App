@@ -8,7 +8,12 @@
 <body>
     <h1>Welcome To Chat App.....</h1>
 
-
+    <form id="message-form">
+        <input type="text" name="message" placeholder="Enter Your Message" />
+        <button type="submit" id="submit_btn" name="send" >Submit</button>
+    </form>
+     
+    <button id="send_location">Send Location</button>
     <!-- allows us to actually make connections to the backend -->
  <script src="/socket.io/socket.io.js"></script>   
  <script src="client.js"></script>   
