@@ -1,7 +1,6 @@
 /* jshint esversion : 8*/
 //  io function called which invokes an event
 var socket = io();
-
 socket.on("connect", () => {
         console.log("Connected To The Server ");
 
@@ -13,21 +12,44 @@ socket.on("connect", () => {
    });
 
 socket.on("newMessage", (newMessage) => {
-        let li = document.createElement("li");
-        li.innerText = `${newMessage.from} : ${newMessage.text}`;
-
-        document.querySelector("body").appendChild(li);
+        const time = moment(newMessage.createdAt).format('LT');
+        // let li = document.createElement("li");
+        // li.innerText = `${newMessage.from} ${time}: ${newMessage.text}`;
+        // document.querySelector("body").appendChild(li);
+        const template = document.querySelector('#message-template').innerHTML;
+        const html = Mustache.render(template,{
+            from : newMessage.from,
+            text : newMessage.text,
+            createdAt : time
+        });  
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        document.querySelector('#message').appendChild(div);
    });   
 
 //    
    socket.on("newLocationMessage", (newMessage) => {
-    let li = document.createElement("li");
-    let a = document.createElement("a");
-    a.setAttribute('target','_blank');
-    a.setAttribute('href',`${newMessage.url}`);
-    a.innerText = 'View Location.....';
-    li.appendChild(a);
-    document.querySelector("body").appendChild(a);
+    const time = moment(newMessage.createdAt).format('LT');
+    const template = document.querySelector('#location-message-template').innerHTML;
+
+    const html = Mustache.render(template, {
+        from : newMessage.from,
+        url : newMessage.url,
+        createdAt : time
+    });
+
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    document.querySelector('#message').appendChild(div);
+    // let li = document.createElement("li");
+    // let a = document.createElement("a");
+    // a.setAttribute('target','_blank');
+    // a.setAttribute('href',`${newMessage.url}`);
+    // a.innerText = `View Location.....`;
+    // li.innerHTML = `${newMessage.from} ${time} : `;
+    // li.appendChild(a);
+    
+    // document.querySelector("body").appendChild(li);
 });    
 // message sent on button click
 document.querySelector('#submit_btn').addEventListener('click',function(event){
