@@ -140,3 +140,5 @@ if The Above Test Succeded use that function wherever required
 
 Mustachejs => A Templating Engine.
 Moment => Time Formating Library.
+
+//-------------------------Auto Scrolling and chat room form-----------------//

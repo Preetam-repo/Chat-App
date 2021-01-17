@@ -2,84 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <title>Join Room | Chat App</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: 'Courgette', cursive;
+        }
+        .logo{
+            height: 71px;
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);   
+        }
+        body{ 
+           background: url('libs/Endless-Constellation.svg');
+           width : 100%;
+           height: 100vh;
+           background-repeat: no-repeat;
+           background-size: cover;
+        }
+        .heading{
+            padding: 17px  0;
+            color: #f3b33c;
+            font-family: 'Courgette', cursive;
+            font-size: 2rem;
+        }
+        #join_form{
+            position: relative;
+            width: 450px;
+            height: 311px;
+            /* background-color: #b088f9; */
+            margin:auto;
+            top:50%;
+            transform: translateY(-50%) ;
+            border: 11px solid #faca72;
+            border-radius: 50px;
+        }
+        .text-center{
+            text-align:center;
+        }
+        .form_group{
+            margin-bottom: 21px;
+        }
+        .form_label{
+            display: block;
+            color: #faca72;
+            margin: 7px;
+            font-family: 'Courgette', cursive;
+        }
+        .form_input{
+            border-radius: 7px;
+            height: 1.7rem;
+            width: 20rem;
+            padding: 15px;
+        }
+        .form_input:focus{
+            outline:none;
+
+        }
+        .chat_btn{
+            padding:7px;
+            border-radius: 7px;
+            background-color: #faca72;
+            color: #330033;
+            font-size: 1.0rem;
+        }
+    </style>
 </head>
-
-<style>
-    *{
-        padding :0;
-        margin : 0;
-        box-sizing: border-box;
-    }
-    body{
-       
-        margin:21px;
-    }
-    .one-message{
-        list-style-type: none;
-        margin: 21px 0;
-    }
-    #main-heading{
-        margin-bottom: 21px;
-    }
-    h4,span,#message-form{
-        display: inline-block;
-        height: 1rem;
-    }
-    button{
-        display: inline-block;
-    }
-</style>
-
 <body>
-    <h1 id="main-heading">Welcome To Chat App.....</h1>
-
-    <form id="message-form">
-        <input type="text" name="message" placeholder="Enter Your Message" />
-        <button type="submit" id="submit_btn" name="send" >Submit</button>
-    </form>
-     
-    <button id="send_location">Send Location</button>
-    <!-- allows us to actually make connections to the backend -->
-
-
-    <div id="message"> 
-           
+    <div>
+        <img class="logo" src="./libs/purple rose.png" />
     </div>
 
-<!-- Text Message Template -->
-    <script type="text/template" id="message-template">
-         <li class="one-message">
-             <div class="message_title">
-                 <h4>{{from}}</h4>
-                 <span>{{createdAt}}</span>
-             </div>
-             <div class="message_body">
-                 <p>{{text}}</p>
-             </div>   
-         </li>
-    </script>
-
-<!-- Location Message Template -->
-    <script type="text/template" id="location-message-template">
-        <li class="one-message">
-            <div class="message_title">
-                <h4>{{from}}</h4>
-                <span>{{createdAt}}</span>
-            </div>
-            <div class="message_body">
-                <a href="{{url}}" target="_blank">Current Location</a>
-            </div>   
-        </li>
-   </script>
-
- <script src="/socket.io/socket.io.js"></script>
- <script src="client.js"></script>     
- <script src="/libs/moment.js"></script> 
- <script src="/libs/mustache.js"></script>   
-
-
-
+<form action="chat.html" id="join_form" class="text-center">
+    <h3 class="heading">Join Chat</h3>
+     <div class="form_group">  
+        <label class="form_label">User Name</label>
+        <div>
+            <input class="form_input" type="text" name="name" >
+        </div>
+     </div> 
+     <div class="form_group">
+        <label class="form_label">Room Name / Id </label>
+        <div >
+            <input class="form_input" type="text" name="room">
+        </div>
+    </div>
+    <div class="form_group">
+        <button class="chat_btn">Go To Chat.....</button>
+    </div>
+</form>  
 </body>
 </html>

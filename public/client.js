@@ -1,6 +1,12 @@
 /* jshint esversion : 8*/
 //  io function called which invokes an event
 var socket = io();
+
+function scrollToBottom(){
+    let messages = document.querySelector('#message').lastElementChild;
+    messages.scrollIntoView();
+}
+
 socket.on("connect", () => {
         console.log("Connected To The Server ");
 
@@ -25,6 +31,7 @@ socket.on("newMessage", (newMessage) => {
         const div = document.createElement('div');
         div.innerHTML = html;
         document.querySelector('#message').appendChild(div);
+        scrollToBottom();
    });   
 
 //    
@@ -41,6 +48,8 @@ socket.on("newMessage", (newMessage) => {
     const div = document.createElement('div');
     div.innerHTML = html;
     document.querySelector('#message').appendChild(div);
+    scrollToBottom();
+
     // let li = document.createElement("li");
     // let a = document.createElement("a");
     // a.setAttribute('target','_blank');
