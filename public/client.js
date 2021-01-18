@@ -8,8 +8,20 @@ function scrollToBottom(){
 }
 
 socket.on("connect", () => {
-        console.log("Connected To The Server ");
+   const params = window.location.search.substring(1);
+   const Userdata = JSON.parse('{"'+ decodeURI(params).replace(/&/g,'","').replace(/\+/g,'" "').replace(/=/g,'":"') +'"}');
+   console.log(Userdata);
+   socket.emit('join', Userdata , (err)=>{
 
+     if(err){
+        alert(err);
+        window.location.href = "/";
+     }
+     else{
+       console.log("Connected!");
+     }
+
+   });
         // as soon as the browser connects to the server
         // socket.emit("createMessage", {
         //      from : "Preetam",
@@ -64,9 +76,9 @@ socket.on("newMessage", (newMessage) => {
 document.querySelector('#submit_btn').addEventListener('click',function(event){
      event.preventDefault();
      socket.emit('createMessage',{
-         from : "user",
          text : document.querySelector('input[name="message"]').value
-     },(msg) => {
+     },
+     (msg) => {
     console.log(msg);
    });
 });
@@ -87,6 +99,20 @@ document.querySelector('#send_location').addEventListener('click',function(){
         alert("Unable To Fetch Location!");
     });
 });
+
+//updateUserList
+   socket.on("updateUserList",(users)=>{
+      ol = document.createElement('ol');
+
+      users.forEach((user)=>{
+        li = document.createElement('li');
+        li.innerHTML = user;
+        ol.appendChild(li); 
+      });
+      let peoples = document.querySelector('#peoples');
+      peoples.innerHTML = "";
+      peoples.appendChild(ol);
+   });
 
 // on disconnect
 socket.on("disconnect", () => {

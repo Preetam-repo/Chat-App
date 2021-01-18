@@ -142,3 +142,9 @@ Mustachejs => A Templating Engine.
 Moment => Time Formating Library.
 
 //-------------------------Auto Scrolling and chat room form-----------------//
+-> Designed join chat page
+-> Uses join function to Join A User 
+
+//--------------ES6 CLASSES----------------------//
+-> USE CLASSES FOR STORING OUR USERS
+   socket.id // we distinguish people by there socket id

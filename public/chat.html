@@ -16,7 +16,15 @@
        
         margin:21px;
     }
+    #side_bar{
+        float:left;
+        width:250px;
+        height: 300px;
+        background-color: #a36ad1;
+        overflow-y: auto;
+    }
     #message{
+        position: relative;
         width : 400px;
         height: 300px;
         background-color: #f8f1f1;
@@ -26,6 +34,10 @@
         list-style-type: none;
         margin: 21px 11px;
     }
+    /* #bottom-input{
+        position: absolute;
+        bottom: -30px;  
+    } */
     #main-heading{
         margin-bottom: 21px;
     }
@@ -36,21 +48,30 @@
     button{
         display: inline-block;
     }
+
 </style>
 
 <body>
     <h1 id="main-heading">Welcome To Chat App.....</h1>
 
+    <div id="side_bar">
+        <h2>Peoples</h2>
+        <div id="peoples">
 
-    <div id="message"></div>
+        </div>
+    </div>
 
+    <div id="message">
+    
+
+    </div>
     <form id="message-form">
         <input type="text" name="message" placeholder="Enter Your Message" />
         <button type="submit" id="submit_btn" name="send" >Submit</button>
-    </form>
+    </form>  
+  
      
     <button id="send_location">Send Location</button>
-    <!-- allows us to actually make connections to the backend -->
 
 
    
@@ -81,6 +102,7 @@
         </li>
    </script>
 
+ <!-- allows us to actually make connections to the backend -->
  <script src="/socket.io/socket.io.js"></script>
  <script src="client.js"></script>     
  <script src="/libs/moment.js"></script> 
